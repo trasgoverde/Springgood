@@ -1,0 +1,142 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="appuser">
+            <h2><span jhiTranslate="springgoodApp.appuser.detail.title">Appuser</span> {{ appuser.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="springgoodApp.appuser.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{ appuser.creationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.assignedVotesPoints">Assigned Votes Points</span></dt>
+                <dd>
+                    <span>{{ appuser.assignedVotesPoints }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.community">Community</span></dt>
+                <dd>
+                    <div *ngIf="appuser.community">
+                        <a [routerLink]="['/community', appuser.community?.id, 'view']">{{ appuser.community?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.blog">Blog</span></dt>
+                <dd>
+                    <div *ngIf="appuser.blog">
+                        <a [routerLink]="['/blog', appuser.blog?.id, 'view']">{{ appuser.blog?.title }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.notification">Notification</span></dt>
+                <dd>
+                    <div *ngIf="appuser.notification">
+                        <a [routerLink]="['/notification', appuser.notification?.id, 'view']">{{ appuser.notification?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.album">Album</span></dt>
+                <dd>
+                    <div *ngIf="appuser.album">
+                        <a [routerLink]="['/album', appuser.album?.id, 'view']">{{ appuser.album?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.comment">Comment</span></dt>
+                <dd>
+                    <div *ngIf="appuser.comment">
+                        <a [routerLink]="['/comment', appuser.comment?.id, 'view']">{{ appuser.comment?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="appuser.post">
+                        <a [routerLink]="['/post', appuser.post?.id, 'view']">{{ appuser.post?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.sender">Sender</span></dt>
+                <dd>
+                    <div *ngIf="appuser.sender">
+                        <a [routerLink]="['/cmessage', appuser.sender?.id, 'view']">{{ appuser.sender?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.receiver">Receiver</span></dt>
+                <dd>
+                    <div *ngIf="appuser.receiver">
+                        <a [routerLink]="['/cmessage', appuser.receiver?.id, 'view']">{{ appuser.receiver?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.followed">Followed</span></dt>
+                <dd>
+                    <div *ngIf="appuser.followed">
+                        <a [routerLink]="['/follow', appuser.followed?.id, 'view']">{{ appuser.followed?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.following">Following</span></dt>
+                <dd>
+                    <div *ngIf="appuser.following">
+                        <a [routerLink]="['/follow', appuser.following?.id, 'view']">{{ appuser.following?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.blockeduser">Blockeduser</span></dt>
+                <dd>
+                    <div *ngIf="appuser.blockeduser">
+                        <a [routerLink]="['/blockuser', appuser.blockeduser?.id, 'view']">{{ appuser.blockeduser?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.blockinguser">Blockinguser</span></dt>
+                <dd>
+                    <div *ngIf="appuser.blockinguser">
+                        <a [routerLink]="['/blockuser', appuser.blockinguser?.id, 'view']">{{ appuser.blockinguser?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.vtopic">Vtopic</span></dt>
+                <dd>
+                    <div *ngIf="appuser.vtopic">
+                        <a [routerLink]="['/vtopic', appuser.vtopic?.id, 'view']">{{ appuser.vtopic?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.vquestion">Vquestion</span></dt>
+                <dd>
+                    <div *ngIf="appuser.vquestion">
+                        <a [routerLink]="['/vquestion', appuser.vquestion?.id, 'view']">{{ appuser.vquestion?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.vanswer">Vanswer</span></dt>
+                <dd>
+                    <div *ngIf="appuser.vanswer">
+                        <a [routerLink]="['/vanswer', appuser.vanswer?.id, 'view']">{{ appuser.vanswer?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.vthumb">Vthumb</span></dt>
+                <dd>
+                    <div *ngIf="appuser.vthumb">
+                        <a [routerLink]="['/vthumb', appuser.vthumb?.id, 'view']">{{ appuser.vthumb?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.proposal">Proposal</span></dt>
+                <dd>
+                    <div *ngIf="appuser.proposal">
+                        <a [routerLink]="['/proposal', appuser.proposal?.id, 'view']">{{ appuser.proposal?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appuser.proposalVote">Proposal Vote</span></dt>
+                <dd>
+                    <div *ngIf="appuser.proposalVote">
+                        <a [routerLink]="['/proposal-vote', appuser.proposalVote?.id, 'view']">{{ appuser.proposalVote?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/appuser', appuser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

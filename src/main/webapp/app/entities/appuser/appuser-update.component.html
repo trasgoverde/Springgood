@@ -1,0 +1,193 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-appuser-heading" jhiTranslate="springgoodApp.appuser.home.createOrEditLabel">Create or edit a Appuser</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.creationDate" for="field_creationDate">Creation Date</label>
+                    <div class="d-flex">
+                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" formControlName="creationDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('creationDate')!.invalid && (editForm.get('creationDate')!.dirty || editForm.get('creationDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('creationDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('creationDate')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.assignedVotesPoints" for="field_assignedVotesPoints">Assigned Votes Points</label>
+                    <input type="number" class="form-control" name="assignedVotesPoints" id="field_assignedVotesPoints"
+                           formControlName="assignedVotesPoints"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.community" for="field_community">Community</label>
+                    <select class="form-control" id="field_community" name="community" formControlName="community">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="communityOption.id === editForm.get('community')!.value?.id ? editForm.get('community')!.value : communityOption" *ngFor="let communityOption of communities; trackBy: trackById">{{ communityOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.blog" for="field_blog">Blog</label>
+                    <select class="form-control" id="field_blog" name="blog" formControlName="blog">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="blogOption.id === editForm.get('blog')!.value?.id ? editForm.get('blog')!.value : blogOption" *ngFor="let blogOption of blogs; trackBy: trackById">{{ blogOption.title }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.notification" for="field_notification">Notification</label>
+                    <select class="form-control" id="field_notification" name="notification" formControlName="notification">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="notificationOption.id === editForm.get('notification')!.value?.id ? editForm.get('notification')!.value : notificationOption" *ngFor="let notificationOption of notifications; trackBy: trackById">{{ notificationOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.album" for="field_album">Album</label>
+                    <select class="form-control" id="field_album" name="album" formControlName="album">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="albumOption.id === editForm.get('album')!.value?.id ? editForm.get('album')!.value : albumOption" *ngFor="let albumOption of albums; trackBy: trackById">{{ albumOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.comment" for="field_comment">Comment</label>
+                    <select class="form-control" id="field_comment" name="comment" formControlName="comment">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="commentOption.id === editForm.get('comment')!.value?.id ? editForm.get('comment')!.value : commentOption" *ngFor="let commentOption of comments; trackBy: trackById">{{ commentOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.post" for="field_post">Post</label>
+                    <select class="form-control" id="field_post" name="post" formControlName="post">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="postOption.id === editForm.get('post')!.value?.id ? editForm.get('post')!.value : postOption" *ngFor="let postOption of posts; trackBy: trackById">{{ postOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.sender" for="field_sender">Sender</label>
+                    <select class="form-control" id="field_sender" name="sender" formControlName="sender">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cmessageOption.id === editForm.get('sender')!.value?.id ? editForm.get('sender')!.value : cmessageOption" *ngFor="let cmessageOption of cmessages; trackBy: trackById">{{ cmessageOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.receiver" for="field_receiver">Receiver</label>
+                    <select class="form-control" id="field_receiver" name="receiver" formControlName="receiver">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cmessageOption.id === editForm.get('receiver')!.value?.id ? editForm.get('receiver')!.value : cmessageOption" *ngFor="let cmessageOption of cmessages; trackBy: trackById">{{ cmessageOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.followed" for="field_followed">Followed</label>
+                    <select class="form-control" id="field_followed" name="followed" formControlName="followed">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="followOption.id === editForm.get('followed')!.value?.id ? editForm.get('followed')!.value : followOption" *ngFor="let followOption of follows; trackBy: trackById">{{ followOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.following" for="field_following">Following</label>
+                    <select class="form-control" id="field_following" name="following" formControlName="following">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="followOption.id === editForm.get('following')!.value?.id ? editForm.get('following')!.value : followOption" *ngFor="let followOption of follows; trackBy: trackById">{{ followOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.blockeduser" for="field_blockeduser">Blockeduser</label>
+                    <select class="form-control" id="field_blockeduser" name="blockeduser" formControlName="blockeduser">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="blockuserOption.id === editForm.get('blockeduser')!.value?.id ? editForm.get('blockeduser')!.value : blockuserOption" *ngFor="let blockuserOption of blockusers; trackBy: trackById">{{ blockuserOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.blockinguser" for="field_blockinguser">Blockinguser</label>
+                    <select class="form-control" id="field_blockinguser" name="blockinguser" formControlName="blockinguser">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="blockuserOption.id === editForm.get('blockinguser')!.value?.id ? editForm.get('blockinguser')!.value : blockuserOption" *ngFor="let blockuserOption of blockusers; trackBy: trackById">{{ blockuserOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.vtopic" for="field_vtopic">Vtopic</label>
+                    <select class="form-control" id="field_vtopic" name="vtopic" formControlName="vtopic">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vtopicOption.id === editForm.get('vtopic')!.value?.id ? editForm.get('vtopic')!.value : vtopicOption" *ngFor="let vtopicOption of vtopics; trackBy: trackById">{{ vtopicOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.vquestion" for="field_vquestion">Vquestion</label>
+                    <select class="form-control" id="field_vquestion" name="vquestion" formControlName="vquestion">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vquestionOption.id === editForm.get('vquestion')!.value?.id ? editForm.get('vquestion')!.value : vquestionOption" *ngFor="let vquestionOption of vquestions; trackBy: trackById">{{ vquestionOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.vanswer" for="field_vanswer">Vanswer</label>
+                    <select class="form-control" id="field_vanswer" name="vanswer" formControlName="vanswer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vanswerOption.id === editForm.get('vanswer')!.value?.id ? editForm.get('vanswer')!.value : vanswerOption" *ngFor="let vanswerOption of vanswers; trackBy: trackById">{{ vanswerOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.vthumb" for="field_vthumb">Vthumb</label>
+                    <select class="form-control" id="field_vthumb" name="vthumb" formControlName="vthumb">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vthumbOption.id === editForm.get('vthumb')!.value?.id ? editForm.get('vthumb')!.value : vthumbOption" *ngFor="let vthumbOption of vthumbs; trackBy: trackById">{{ vthumbOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.proposal" for="field_proposal">Proposal</label>
+                    <select class="form-control" id="field_proposal" name="proposal" formControlName="proposal">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="proposalOption.id === editForm.get('proposal')!.value?.id ? editForm.get('proposal')!.value : proposalOption" *ngFor="let proposalOption of proposals; trackBy: trackById">{{ proposalOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appuser.proposalVote" for="field_proposalVote">Proposal Vote</label>
+                    <select class="form-control" id="field_proposalVote" name="proposalVote" formControlName="proposalVote">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="proposalVoteOption.id === editForm.get('proposalVote')!.value?.id ? editForm.get('proposalVote')!.value : proposalVoteOption" *ngFor="let proposalVoteOption of proposalvotes; trackBy: trackById">{{ proposalVoteOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

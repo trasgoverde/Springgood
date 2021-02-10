@@ -1,0 +1,87 @@
+{
+  "name": "Proposal",
+  "fields": [
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "proposalName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength",
+        "required"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "250"
+    },
+    {
+      "fieldName": "proposalType",
+      "fieldType": "ProposalType",
+      "fieldValues": "STUDY,APPROVED,DEVELOPMENT,PRODUCTION",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "proposalRole",
+      "fieldType": "ProposalRole",
+      "fieldValues": "APPUSER,ORGANIZER,MANAGER,ADMIN",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "releaseDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isOpen",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isAccepted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isPaid",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "appuser",
+      "otherEntityRelationshipName": "proposal",
+      "relationshipName": "appuser"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "proposalVote",
+      "otherEntityRelationshipName": "proposal",
+      "relationshipName": "proposalVote"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "proposal",
+      "relationshipName": "post",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210210221356",
+  "entityTableName": "proposal",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

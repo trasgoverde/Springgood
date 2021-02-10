@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.proposalVote.home.title">Proposal Votes</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-proposal-vote" [routerLink]="['/proposal-vote/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.proposalVote.home.createLabel">
+            Create a new Proposal Vote
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="proposalVotes?.length === 0">
+        <span jhiTranslate="springgoodApp.proposalVote.home.notFound">No proposalVotes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="proposalVotes && proposalVotes.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.proposalVote.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="votePoints"><span jhiTranslate="springgoodApp.proposalVote.votePoints">Vote Points</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="proposal.id"><span jhiTranslate="springgoodApp.proposalVote.proposal">Proposal</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let proposalVote of proposalVotes ;trackBy: trackId">
+                    <td><a [routerLink]="['/proposal-vote', proposalVote.id, 'view']">{{ proposalVote.id }}</a></td>
+                    <td>{{ proposalVote.creationDate | date:'medium' }}</td>
+                    <td>{{ proposalVote.votePoints }}</td>
+                    <td>
+                        <div *ngIf="proposalVote.proposal">
+                            <a [routerLink]="['/proposal', proposalVote.proposal?.id, 'view']" >{{ proposalVote.proposal?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/proposal-vote', proposalVote.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/proposal-vote', proposalVote.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(proposalVote)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

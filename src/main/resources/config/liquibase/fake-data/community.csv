@@ -1,0 +1,11 @@
+id;creation_date;community_name;community_description;image;image_content_type;is_active;calbum_id
+1;2021-02-10T12:38:29;Sleek;PNG multi-byte Mission;../fake-data/blob/hipster.png;image/png;false;1
+2;2021-02-10T02:51:59;SQL bus;matrix;../fake-data/blob/hipster.png;image/png;false;2
+3;2021-02-10T09:31:45;Money Market Account purple;Nuevo Sol Slovakia (Slovak Republic) Accountability;../fake-data/blob/hipster.png;image/png;false;3
+4;2021-02-10T14:10:04;monitor;Borders;../fake-data/blob/hipster.png;image/png;true;4
+5;2021-02-10T07:03:14;Road mint green Kyrgyz Republic;Solutions;../fake-data/blob/hipster.png;image/png;true;5
+6;2021-02-09T22:55:26;Legacy monitor RAM;Alaska Chips haptic;../fake-data/blob/hipster.png;image/png;true;6
+7;2021-02-10T16:53:20;Avon Fish pixel;Frozen bypass Incredible Rubber Chips;../fake-data/blob/hipster.png;image/png;true;7
+8;2021-02-10T08:45:02;Somalia XSS Integration;Regional fuchsia copying;../fake-data/blob/hipster.png;image/png;false;8
+9;2021-02-10T13:55:29;withdrawal;GB Wooden bandwidth;../fake-data/blob/hipster.png;image/png;true;9
+10;2021-02-10T11:01:26;Investment Account Brand global;Human;../fake-data/blob/hipster.png;image/png;false;10

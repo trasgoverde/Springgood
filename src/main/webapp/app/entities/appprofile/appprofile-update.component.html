@@ -1,0 +1,177 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-appprofile-heading" jhiTranslate="springgoodApp.appprofile.home.createOrEditLabel">Create or edit a Appprofile</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.creationDate" for="field_creationDate">Creation Date</label>
+                    <div class="d-flex">
+                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" formControlName="creationDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('creationDate')!.invalid && (editForm.get('creationDate')!.dirty || editForm.get('creationDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('creationDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('creationDate')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.gender" for="field_gender">Gender</label>
+                    <select class="form-control" name="gender" formControlName="gender" id="field_gender">
+                        <option value="MALE">{{ 'springgoodApp.Gender.MALE' | translate }}</option>
+                        <option value="FEMALE">{{ 'springgoodApp.Gender.FEMALE' | translate }}</option>
+                        <option value="OTHER">{{ 'springgoodApp.Gender.OTHER' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.phone" for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone"
+                           formControlName="phone"/>
+                    <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('phone')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.bio" for="field_bio">Bio</label>
+                    <input type="text" class="form-control" name="bio" id="field_bio"
+                           formControlName="bio"/>
+                    <div *ngIf="editForm.get('bio')!.invalid && (editForm.get('bio')!.dirty || editForm.get('bio')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('bio')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 7500 }">
+                        This field cannot be longer than 7500 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.facebook" for="field_facebook">Facebook</label>
+                    <input type="text" class="form-control" name="facebook" id="field_facebook"
+                           formControlName="facebook"/>
+                    <div *ngIf="editForm.get('facebook')!.invalid && (editForm.get('facebook')!.dirty || editForm.get('facebook')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('facebook')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.twitter" for="field_twitter">Twitter</label>
+                    <input type="text" class="form-control" name="twitter" id="field_twitter"
+                           formControlName="twitter"/>
+                    <div *ngIf="editForm.get('twitter')!.invalid && (editForm.get('twitter')!.dirty || editForm.get('twitter')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('twitter')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.linkedin" for="field_linkedin">Linkedin</label>
+                    <input type="text" class="form-control" name="linkedin" id="field_linkedin"
+                           formControlName="linkedin"/>
+                    <div *ngIf="editForm.get('linkedin')!.invalid && (editForm.get('linkedin')!.dirty || editForm.get('linkedin')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('linkedin')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.instagram" for="field_instagram">Instagram</label>
+                    <input type="text" class="form-control" name="instagram" id="field_instagram"
+                           formControlName="instagram"/>
+                    <div *ngIf="editForm.get('instagram')!.invalid && (editForm.get('instagram')!.dirty || editForm.get('instagram')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('instagram')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.googlePlus" for="field_googlePlus">Google Plus</label>
+                    <input type="text" class="form-control" name="googlePlus" id="field_googlePlus"
+                           formControlName="googlePlus"/>
+                    <div *ngIf="editForm.get('googlePlus')!.invalid && (editForm.get('googlePlus')!.dirty || editForm.get('googlePlus')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('googlePlus')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.birthdate" for="field_birthdate">Birthdate</label>
+                    <div class="d-flex">
+                        <input id="field_birthdate" type="datetime-local" class="form-control" name="birthdate" formControlName="birthdate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.sibblings" for="field_sibblings">Sibblings</label>
+                    <input type="number" class="form-control" name="sibblings" id="field_sibblings"
+                           formControlName="sibblings"/>
+                    <div *ngIf="editForm.get('sibblings')!.invalid && (editForm.get('sibblings')!.dirty || editForm.get('sibblings')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sibblings')?.errors?.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: -1 }">
+                            This field should be at least -1.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sibblings')?.errors?.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 20 }">
+                            This field cannot be more than 20.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('sibblings')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.appprofile.appuser" for="field_appuser">Appuser</label>
+                    <select class="form-control" id="field_appuser" name="appuser" formControlName="appuser">
+                        <option *ngIf="!editForm.get('appuser')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="appuserOption.id === editForm.get('appuser')!.value?.id ? editForm.get('appuser')!.value : appuserOption" *ngFor="let appuserOption of appusers; trackBy: trackById">{{ appuserOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('appuser')!.invalid && (editForm.get('appuser')!.dirty || editForm.get('appuser')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('appuser')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

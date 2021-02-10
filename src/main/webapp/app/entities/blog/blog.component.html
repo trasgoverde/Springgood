@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.blog.home.title">Blogs</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-blog" [routerLink]="['/blog/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.blog.home.createLabel">
+            Create a new Blog
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="blogs?.length === 0">
+        <span jhiTranslate="springgoodApp.blog.home.notFound">No blogs found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="blogs && blogs.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.blog.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="title"><span jhiTranslate="springgoodApp.blog.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="image"><span jhiTranslate="springgoodApp.blog.image">Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="community.communityName"><span jhiTranslate="springgoodApp.blog.community">Community</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let blog of blogs ;trackBy: trackId">
+                    <td><a [routerLink]="['/blog', blog.id, 'view']">{{ blog.id }}</a></td>
+                    <td>{{ blog.creationDate | date:'medium' }}</td>
+                    <td>{{ blog.title }}</td>
+                    <td>
+                        <a *ngIf="blog.image" (click)="openFile(blog.imageContentType, blog.image)">
+                            <img [src]="'data:' + blog.imageContentType + ';base64,' + blog.image" style="max-height: 30px;" alt="blog image"/>
+                        </a>
+                        <span *ngIf="blog.image">{{ blog.imageContentType }}, {{ byteSize(blog.image) }}</span>
+                    </td>
+                    <td>
+                        <div *ngIf="blog.community">
+                            <a [routerLink]="['/community', blog.community?.id, 'view']" >{{ blog.community?.communityName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/blog', blog.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/blog', blog.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(blog)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

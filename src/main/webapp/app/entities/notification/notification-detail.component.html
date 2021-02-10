@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="notification">
+            <h2><span jhiTranslate="springgoodApp.notification.detail.title">Notification</span> {{ notification.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="springgoodApp.notification.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{ notification.creationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.notification.notificationDate">Notification Date</span></dt>
+                <dd>
+                    <span>{{ notification.notificationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.notification.notificationReason">Notification Reason</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'springgoodApp.NotificationReason.' + notification.notificationReason }}">{{ notification.notificationReason }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.notification.notificationText">Notification Text</span></dt>
+                <dd>
+                    <span>{{ notification.notificationText }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.notification.isDelivered">Is Delivered</span></dt>
+                <dd>
+                    <span>{{ notification.isDelivered }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/notification', notification.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="proposal">
+            <h2><span jhiTranslate="springgoodApp.proposal.detail.title">Proposal</span> {{ proposal.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="springgoodApp.proposal.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{ proposal.creationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.proposalName">Proposal Name</span></dt>
+                <dd>
+                    <span>{{ proposal.proposalName }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.proposalType">Proposal Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'springgoodApp.ProposalType.' + proposal.proposalType }}">{{ proposal.proposalType }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.proposalRole">Proposal Role</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'springgoodApp.ProposalRole.' + proposal.proposalRole }}">{{ proposal.proposalRole }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.releaseDate">Release Date</span></dt>
+                <dd>
+                    <span>{{ proposal.releaseDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.isOpen">Is Open</span></dt>
+                <dd>
+                    <span>{{ proposal.isOpen }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.isAccepted">Is Accepted</span></dt>
+                <dd>
+                    <span>{{ proposal.isAccepted }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.isPaid">Is Paid</span></dt>
+                <dd>
+                    <span>{{ proposal.isPaid }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.proposal.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="proposal.post">
+                        <a [routerLink]="['/post', proposal.post?.id, 'view']">{{ proposal.post?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/proposal', proposal.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

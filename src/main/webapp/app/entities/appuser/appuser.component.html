@@ -1,0 +1,171 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.appuser.home.title">Appusers</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-appuser" [routerLink]="['/appuser/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.appuser.home.createLabel">
+            Create a new Appuser
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="appusers?.length === 0">
+        <span jhiTranslate="springgoodApp.appuser.home.notFound">No appusers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="appusers && appusers.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.appuser.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="assignedVotesPoints"><span jhiTranslate="springgoodApp.appuser.assignedVotesPoints">Assigned Votes Points</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="community.id"><span jhiTranslate="springgoodApp.appuser.community">Community</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="blog.title"><span jhiTranslate="springgoodApp.appuser.blog">Blog</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="notification.id"><span jhiTranslate="springgoodApp.appuser.notification">Notification</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="album.id"><span jhiTranslate="springgoodApp.appuser.album">Album</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="comment.id"><span jhiTranslate="springgoodApp.appuser.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="post.id"><span jhiTranslate="springgoodApp.appuser.post">Post</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sender.id"><span jhiTranslate="springgoodApp.appuser.sender">Sender</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="receiver.id"><span jhiTranslate="springgoodApp.appuser.receiver">Receiver</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="followed.id"><span jhiTranslate="springgoodApp.appuser.followed">Followed</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="following.id"><span jhiTranslate="springgoodApp.appuser.following">Following</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="blockeduser.id"><span jhiTranslate="springgoodApp.appuser.blockeduser">Blockeduser</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="blockinguser.id"><span jhiTranslate="springgoodApp.appuser.blockinguser">Blockinguser</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="vtopic.id"><span jhiTranslate="springgoodApp.appuser.vtopic">Vtopic</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="vquestion.id"><span jhiTranslate="springgoodApp.appuser.vquestion">Vquestion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="vanswer.id"><span jhiTranslate="springgoodApp.appuser.vanswer">Vanswer</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="vthumb.id"><span jhiTranslate="springgoodApp.appuser.vthumb">Vthumb</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="proposal.id"><span jhiTranslate="springgoodApp.appuser.proposal">Proposal</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="proposalVote.id"><span jhiTranslate="springgoodApp.appuser.proposalVote">Proposal Vote</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let appuser of appusers ;trackBy: trackId">
+                    <td><a [routerLink]="['/appuser', appuser.id, 'view']">{{ appuser.id }}</a></td>
+                    <td>{{ appuser.creationDate | date:'medium' }}</td>
+                    <td>{{ appuser.assignedVotesPoints }}</td>
+                    <td>
+                        <div *ngIf="appuser.community">
+                            <a [routerLink]="['/community', appuser.community?.id, 'view']" >{{ appuser.community?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.blog">
+                            <a [routerLink]="['/blog', appuser.blog?.id, 'view']" >{{ appuser.blog?.title }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.notification">
+                            <a [routerLink]="['/notification', appuser.notification?.id, 'view']" >{{ appuser.notification?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.album">
+                            <a [routerLink]="['/album', appuser.album?.id, 'view']" >{{ appuser.album?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.comment">
+                            <a [routerLink]="['/comment', appuser.comment?.id, 'view']" >{{ appuser.comment?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.post">
+                            <a [routerLink]="['/post', appuser.post?.id, 'view']" >{{ appuser.post?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.sender">
+                            <a [routerLink]="['/cmessage', appuser.sender?.id, 'view']" >{{ appuser.sender?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.receiver">
+                            <a [routerLink]="['/cmessage', appuser.receiver?.id, 'view']" >{{ appuser.receiver?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.followed">
+                            <a [routerLink]="['/follow', appuser.followed?.id, 'view']" >{{ appuser.followed?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.following">
+                            <a [routerLink]="['/follow', appuser.following?.id, 'view']" >{{ appuser.following?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.blockeduser">
+                            <a [routerLink]="['/blockuser', appuser.blockeduser?.id, 'view']" >{{ appuser.blockeduser?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.blockinguser">
+                            <a [routerLink]="['/blockuser', appuser.blockinguser?.id, 'view']" >{{ appuser.blockinguser?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.vtopic">
+                            <a [routerLink]="['/vtopic', appuser.vtopic?.id, 'view']" >{{ appuser.vtopic?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.vquestion">
+                            <a [routerLink]="['/vquestion', appuser.vquestion?.id, 'view']" >{{ appuser.vquestion?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.vanswer">
+                            <a [routerLink]="['/vanswer', appuser.vanswer?.id, 'view']" >{{ appuser.vanswer?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.vthumb">
+                            <a [routerLink]="['/vthumb', appuser.vthumb?.id, 'view']" >{{ appuser.vthumb?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.proposal">
+                            <a [routerLink]="['/proposal', appuser.proposal?.id, 'view']" >{{ appuser.proposal?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="appuser.proposalVote">
+                            <a [routerLink]="['/proposal-vote', appuser.proposalVote?.id, 'view']" >{{ appuser.proposalVote?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/appuser', appuser.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/appuser', appuser.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(appuser)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

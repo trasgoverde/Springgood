@@ -1,0 +1,11 @@
+id;creation_date;proposal_name;proposal_type;proposal_role;release_date;is_open;is_accepted;is_paid
+1;2021-02-10T17:15:42;Incredible Wooden Car;DEVELOPMENT;MANAGER;2021-02-10T21:30:42;true;false;false
+2;2021-02-10T08:10:26;methodical;PRODUCTION;ADMIN;2021-02-10T10:16:33;true;false;true
+3;2021-02-10T16:05:20;calculating high-level purple;STUDY;ADMIN;2021-02-10T09:27:31;true;false;true
+4;2021-02-10T11:31:08;Generic niches California;DEVELOPMENT;APPUSER;2021-02-10T09:50:26;false;false;true
+5;2021-02-10T15:56:19;Chief Administrator;STUDY;ADMIN;2021-02-10T03:03:12;false;true;true
+6;2021-02-10T18:45:16;Hawaii Configuration Rubber;PRODUCTION;ADMIN;2021-02-09T22:23:44;true;false;true
+7;2021-02-09T23:28:35;PNG Borders multimedia;APPROVED;APPUSER;2021-02-10T20:52:42;false;false;true
+8;2021-02-10T15:51:59;Markets Iran;APPROVED;ORGANIZER;2021-02-10T08:16:51;true;true;true
+9;2021-02-10T01:33:55;convergence deposit;DEVELOPMENT;ADMIN;2021-02-10T21:18:51;false;false;true
+10;2021-02-10T07:05:43;e-business ROI black;STUDY;APPUSER;2021-02-10T06:10:33;false;false;true

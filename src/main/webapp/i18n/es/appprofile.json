@@ -1,0 +1,33 @@
+{
+  "springgoodApp": {
+    "appprofile": {
+      "home": {
+        "title": "Appprofiles",
+        "createLabel": "Crear nuevo Appprofile",
+        "createOrEditLabel": "Crear o editar Appprofile",
+        "notFound": "Ningún Appprofiles encontrado"
+      },
+      "created": "Un nuevo Appprofile ha sido creado con el identificador {{ param }}",
+      "updated": "Un Appprofile ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Appprofile ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Appprofile {{ id }}?"
+      },
+      "detail": {
+        "title": "Appprofile"
+      },
+      "creationDate": "Creation Date",
+      "gender": "Gender",
+      "phone": "Phone",
+      "bio": "Bio",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "Linkedin",
+      "instagram": "Instagram",
+      "googlePlus": "Google Plus",
+      "birthdate": "Birthdate",
+      "sibblings": "Sibblings",
+      "appuser": "Appuser"
+    }
+  }
+}

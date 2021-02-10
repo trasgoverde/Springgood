@@ -1,0 +1,37 @@
+{
+  "name": "Topic",
+  "fields": [
+    {
+      "fieldName": "topicName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength",
+        "required"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "40"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "topic",
+      "relationshipName": "post",
+      "otherEntityField": "headline",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20210210214956",
+  "entityTableName": "topic",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.proposal.home.title">Proposals</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-proposal" [routerLink]="['/proposal/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.proposal.home.createLabel">
+            Create a new Proposal
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="proposals?.length === 0">
+        <span jhiTranslate="springgoodApp.proposal.home.notFound">No proposals found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="proposals && proposals.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.proposal.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="proposalName"><span jhiTranslate="springgoodApp.proposal.proposalName">Proposal Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="proposalType"><span jhiTranslate="springgoodApp.proposal.proposalType">Proposal Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="proposalRole"><span jhiTranslate="springgoodApp.proposal.proposalRole">Proposal Role</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="releaseDate"><span jhiTranslate="springgoodApp.proposal.releaseDate">Release Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isOpen"><span jhiTranslate="springgoodApp.proposal.isOpen">Is Open</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isAccepted"><span jhiTranslate="springgoodApp.proposal.isAccepted">Is Accepted</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isPaid"><span jhiTranslate="springgoodApp.proposal.isPaid">Is Paid</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="post.id"><span jhiTranslate="springgoodApp.proposal.post">Post</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let proposal of proposals ;trackBy: trackId">
+                    <td><a [routerLink]="['/proposal', proposal.id, 'view']">{{ proposal.id }}</a></td>
+                    <td>{{ proposal.creationDate | date:'medium' }}</td>
+                    <td>{{ proposal.proposalName }}</td>
+                    <td jhiTranslate="{{ 'springgoodApp.ProposalType.' + proposal.proposalType }}">{{ proposal.proposalType }}</td>
+                    <td jhiTranslate="{{ 'springgoodApp.ProposalRole.' + proposal.proposalRole }}">{{ proposal.proposalRole }}</td>
+                    <td>{{ proposal.releaseDate | date:'medium' }}</td>
+                    <td>{{ proposal.isOpen }}</td>
+                    <td>{{ proposal.isAccepted }}</td>
+                    <td>{{ proposal.isPaid }}</td>
+                    <td>
+                        <div *ngIf="proposal.post">
+                            <a [routerLink]="['/post', proposal.post?.id, 'view']" >{{ proposal.post?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/proposal', proposal.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/proposal', proposal.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(proposal)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-proposal-heading" jhiTranslate="springgoodApp.proposal.home.createOrEditLabel">Create or edit a Proposal</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.creationDate" for="field_creationDate">Creation Date</label>
+                    <div class="d-flex">
+                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" formControlName="creationDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('creationDate')!.invalid && (editForm.get('creationDate')!.dirty || editForm.get('creationDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('creationDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('creationDate')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.proposalName" for="field_proposalName">Proposal Name</label>
+                    <input type="text" class="form-control" name="proposalName" id="field_proposalName"
+                           formControlName="proposalName"/>
+                    <div *ngIf="editForm.get('proposalName')!.invalid && (editForm.get('proposalName')!.dirty || editForm.get('proposalName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('proposalName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('proposalName')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 2 }">
+                        This field is required to be at least 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('proposalName')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 250 }">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.proposalType" for="field_proposalType">Proposal Type</label>
+                    <select class="form-control" name="proposalType" formControlName="proposalType" id="field_proposalType">
+                        <option value="STUDY">{{ 'springgoodApp.ProposalType.STUDY' | translate }}</option>
+                        <option value="APPROVED">{{ 'springgoodApp.ProposalType.APPROVED' | translate }}</option>
+                        <option value="DEVELOPMENT">{{ 'springgoodApp.ProposalType.DEVELOPMENT' | translate }}</option>
+                        <option value="PRODUCTION">{{ 'springgoodApp.ProposalType.PRODUCTION' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('proposalType')!.invalid && (editForm.get('proposalType')!.dirty || editForm.get('proposalType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('proposalType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.proposalRole" for="field_proposalRole">Proposal Role</label>
+                    <select class="form-control" name="proposalRole" formControlName="proposalRole" id="field_proposalRole">
+                        <option value="APPUSER">{{ 'springgoodApp.ProposalRole.APPUSER' | translate }}</option>
+                        <option value="ORGANIZER">{{ 'springgoodApp.ProposalRole.ORGANIZER' | translate }}</option>
+                        <option value="MANAGER">{{ 'springgoodApp.ProposalRole.MANAGER' | translate }}</option>
+                        <option value="ADMIN">{{ 'springgoodApp.ProposalRole.ADMIN' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('proposalRole')!.invalid && (editForm.get('proposalRole')!.dirty || editForm.get('proposalRole')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('proposalRole')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.releaseDate" for="field_releaseDate">Release Date</label>
+                    <div class="d-flex">
+                        <input id="field_releaseDate" type="datetime-local" class="form-control" name="releaseDate" formControlName="releaseDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.isOpen" for="field_isOpen">Is Open</label>
+                    <input type="checkbox" class="form-control" name="isOpen" id="field_isOpen"
+                           formControlName="isOpen"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.isAccepted" for="field_isAccepted">Is Accepted</label>
+                    <input type="checkbox" class="form-control" name="isAccepted" id="field_isAccepted"
+                           formControlName="isAccepted"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.isPaid" for="field_isPaid">Is Paid</label>
+                    <input type="checkbox" class="form-control" name="isPaid" id="field_isPaid"
+                           formControlName="isPaid"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="springgoodApp.proposal.post" for="field_post">Post</label>
+                    <select class="form-control" id="field_post" name="post" formControlName="post">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="postOption.id === editForm.get('post')!.value?.id ? editForm.get('post')!.value : postOption" *ngFor="let postOption of posts; trackBy: trackById">{{ postOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
