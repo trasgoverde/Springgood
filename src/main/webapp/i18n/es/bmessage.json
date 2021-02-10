@@ -1,0 +1,24 @@
+{
+  "springgoodApp": {
+    "bmessage": {
+      "home": {
+        "title": "Bmessages",
+        "createLabel": "Crear nuevo Bmessage",
+        "createOrEditLabel": "Crear o editar Bmessage",
+        "notFound": "Ningún Bmessages encontrado"
+      },
+      "created": "Un nuevo Bmessage ha sido creado con el identificador {{ param }}",
+      "updated": "Un Bmessage ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Bmessage ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Bmessage {{ id }}?"
+      },
+      "detail": {
+        "title": "Bmessage"
+      },
+      "creationDate": "Creation Date",
+      "bmessageText": "Bmessage Text",
+      "isDelivered": "Is Delivered"
+    }
+  }
+}

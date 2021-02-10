@@ -1,0 +1,73 @@
+{
+  "name": "Vquestion",
+  "fields": [
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "vquestion",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength",
+        "required"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "vquestionDescription",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "250"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "appuser",
+      "otherEntityRelationshipName": "vquestion",
+      "relationshipValidateRules": "required",
+      "relationshipName": "appuser"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vanswer",
+      "otherEntityRelationshipName": "vquestion",
+      "relationshipName": "vanswer"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vthumb",
+      "otherEntityRelationshipName": "vquestion",
+      "relationshipName": "vthumb"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vtopic",
+      "otherEntityRelationshipName": "vquestion",
+      "relationshipValidateRules": "required",
+      "relationshipName": "vtopic",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210210221056",
+  "entityTableName": "vquestion",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

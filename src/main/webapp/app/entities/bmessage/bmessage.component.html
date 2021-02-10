@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.bmessage.home.title">Bmessages</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bmessage" [routerLink]="['/bmessage/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.bmessage.home.createLabel">
+            Create a new Bmessage
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="bmessages?.length === 0">
+        <span jhiTranslate="springgoodApp.bmessage.home.notFound">No bmessages found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="bmessages && bmessages.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.bmessage.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bmessageText"><span jhiTranslate="springgoodApp.bmessage.bmessageText">Bmessage Text</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isDelivered"><span jhiTranslate="springgoodApp.bmessage.isDelivered">Is Delivered</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let bmessage of bmessages ;trackBy: trackId">
+                    <td><a [routerLink]="['/bmessage', bmessage.id, 'view']">{{ bmessage.id }}</a></td>
+                    <td>{{ bmessage.creationDate | date:'medium' }}</td>
+                    <td>{{ bmessage.bmessageText }}</td>
+                    <td>{{ bmessage.isDelivered }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/bmessage', bmessage.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/bmessage', bmessage.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(bmessage)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

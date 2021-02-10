@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bmessage">
+            <h2><span jhiTranslate="springgoodApp.bmessage.detail.title">Bmessage</span> {{ bmessage.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="springgoodApp.bmessage.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{ bmessage.creationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.bmessage.bmessageText">Bmessage Text</span></dt>
+                <dd>
+                    <span>{{ bmessage.bmessageText }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.bmessage.isDelivered">Is Delivered</span></dt>
+                <dd>
+                    <span>{{ bmessage.isDelivered }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bmessage', bmessage.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

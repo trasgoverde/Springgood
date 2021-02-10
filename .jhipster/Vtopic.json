@@ -1,0 +1,59 @@
+{
+  "name": "Vtopic",
+  "fields": [
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "vtopicTitle",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength",
+        "required"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "vtopicDescription",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "250"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "appuser",
+      "otherEntityRelationshipName": "vtopic",
+      "relationshipValidateRules": "required",
+      "relationshipName": "appuser"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vquestion",
+      "otherEntityRelationshipName": "vtopic",
+      "relationshipName": "vquestion"
+    }
+  ],
+  "changelogDate": "20210210220956",
+  "entityTableName": "vtopic",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

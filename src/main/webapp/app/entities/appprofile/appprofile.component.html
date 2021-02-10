@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.appprofile.home.title">Appprofiles</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-appprofile" [routerLink]="['/appprofile/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.appprofile.home.createLabel">
+            Create a new Appprofile
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="appprofiles?.length === 0">
+        <span jhiTranslate="springgoodApp.appprofile.home.notFound">No appprofiles found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="appprofiles && appprofiles.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.appprofile.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gender"><span jhiTranslate="springgoodApp.appprofile.gender">Gender</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phone"><span jhiTranslate="springgoodApp.appprofile.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bio"><span jhiTranslate="springgoodApp.appprofile.bio">Bio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="facebook"><span jhiTranslate="springgoodApp.appprofile.facebook">Facebook</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="twitter"><span jhiTranslate="springgoodApp.appprofile.twitter">Twitter</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="linkedin"><span jhiTranslate="springgoodApp.appprofile.linkedin">Linkedin</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="instagram"><span jhiTranslate="springgoodApp.appprofile.instagram">Instagram</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="googlePlus"><span jhiTranslate="springgoodApp.appprofile.googlePlus">Google Plus</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="birthdate"><span jhiTranslate="springgoodApp.appprofile.birthdate">Birthdate</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sibblings"><span jhiTranslate="springgoodApp.appprofile.sibblings">Sibblings</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="appuser.id"><span jhiTranslate="springgoodApp.appprofile.appuser">Appuser</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let appprofile of appprofiles ;trackBy: trackId">
+                    <td><a [routerLink]="['/appprofile', appprofile.id, 'view']">{{ appprofile.id }}</a></td>
+                    <td>{{ appprofile.creationDate | date:'medium' }}</td>
+                    <td jhiTranslate="{{ 'springgoodApp.Gender.' + appprofile.gender }}">{{ appprofile.gender }}</td>
+                    <td>{{ appprofile.phone }}</td>
+                    <td>{{ appprofile.bio }}</td>
+                    <td>{{ appprofile.facebook }}</td>
+                    <td>{{ appprofile.twitter }}</td>
+                    <td>{{ appprofile.linkedin }}</td>
+                    <td>{{ appprofile.instagram }}</td>
+                    <td>{{ appprofile.googlePlus }}</td>
+                    <td>{{ appprofile.birthdate | date:'medium' }}</td>
+                    <td>{{ appprofile.sibblings }}</td>
+                    <td>
+                        <div *ngIf="appprofile.appuser">
+                            <a [routerLink]="['/appuser', appprofile.appuser?.id, 'view']" >{{ appprofile.appuser?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/appprofile', appprofile.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/appprofile', appprofile.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(appprofile)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

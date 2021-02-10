@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Appuser.
+    -->
+    <changeSet id="20210210221556-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="community_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_community_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="community"/>
+
+        <addForeignKeyConstraint baseColumnNames="blog_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_blog_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blog"/>
+
+        <addForeignKeyConstraint baseColumnNames="notification_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_notification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="notification"/>
+
+        <addForeignKeyConstraint baseColumnNames="album_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_album_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="album"/>
+
+        <addForeignKeyConstraint baseColumnNames="comment_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_comment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comment"/>
+
+        <addForeignKeyConstraint baseColumnNames="post_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_post_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="post"/>
+
+        <addForeignKeyConstraint baseColumnNames="sender_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_sender_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cmessage"/>
+
+        <addForeignKeyConstraint baseColumnNames="receiver_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_receiver_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cmessage"/>
+
+        <addForeignKeyConstraint baseColumnNames="followed_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_followed_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="follow"/>
+
+        <addForeignKeyConstraint baseColumnNames="following_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_following_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="follow"/>
+
+        <addForeignKeyConstraint baseColumnNames="blockeduser_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_blockeduser_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blockuser"/>
+
+        <addForeignKeyConstraint baseColumnNames="blockinguser_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_blockinguser_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blockuser"/>
+
+        <addForeignKeyConstraint baseColumnNames="vtopic_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_vtopic_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vtopic"/>
+
+        <addForeignKeyConstraint baseColumnNames="vquestion_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_vquestion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vquestion"/>
+
+        <addForeignKeyConstraint baseColumnNames="vanswer_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_vanswer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vanswer"/>
+
+        <addForeignKeyConstraint baseColumnNames="vthumb_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_vthumb_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vthumb"/>
+
+        <addForeignKeyConstraint baseColumnNames="proposal_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_proposal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="proposal"/>
+
+        <addForeignKeyConstraint baseColumnNames="proposal_vote_id"
+                                 baseTableName="appuser"
+                                 constraintName="fk_appuser_proposal_vote_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="proposal_vote"/>
+
+    </changeSet>
+</databaseChangeLog>

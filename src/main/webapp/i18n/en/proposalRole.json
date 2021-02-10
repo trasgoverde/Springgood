@@ -1,0 +1,11 @@
+{
+  "springgoodApp": {
+    "ProposalRole": {
+      "null": "",
+      "APPUSER": "APPUSER",
+      "ORGANIZER": "ORGANIZER",
+      "MANAGER": "MANAGER",
+      "ADMIN": "ADMIN"
+    }
+  }
+}

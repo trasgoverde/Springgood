@@ -1,0 +1,80 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.community.home.title">Communities</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-community" [routerLink]="['/community/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.community.home.createLabel">
+            Create a new Community
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="communities?.length === 0">
+        <span jhiTranslate="springgoodApp.community.home.notFound">No communities found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="communities && communities.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.community.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="communityName"><span jhiTranslate="springgoodApp.community.communityName">Community Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="communityDescription"><span jhiTranslate="springgoodApp.community.communityDescription">Community Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="image"><span jhiTranslate="springgoodApp.community.image">Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isActive"><span jhiTranslate="springgoodApp.community.isActive">Is Active</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="calbum.id"><span jhiTranslate="springgoodApp.community.calbum">Calbum</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let community of communities ;trackBy: trackId">
+                    <td><a [routerLink]="['/community', community.id, 'view']">{{ community.id }}</a></td>
+                    <td>{{ community.creationDate | date:'medium' }}</td>
+                    <td>{{ community.communityName }}</td>
+                    <td>{{ community.communityDescription }}</td>
+                    <td>
+                        <a *ngIf="community.image" (click)="openFile(community.imageContentType, community.image)">
+                            <img [src]="'data:' + community.imageContentType + ';base64,' + community.image" style="max-height: 30px;" alt="community image"/>
+                        </a>
+                        <span *ngIf="community.image">{{ community.imageContentType }}, {{ byteSize(community.image) }}</span>
+                    </td>
+                    <td>{{ community.isActive }}</td>
+                    <td>
+                        <div *ngIf="community.calbum">
+                            <a [routerLink]="['/calbum', community.calbum?.id, 'view']" >{{ community.calbum?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/community', community.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/community', community.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(community)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

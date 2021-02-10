@@ -1,0 +1,49 @@
+{
+  "name": "Calbum",
+  "fields": [
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength",
+        "required"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "community",
+      "otherEntityRelationshipName": "calbum",
+      "relationshipValidateRules": "required",
+      "relationshipName": "community"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "photo",
+      "otherEntityRelationshipName": "calbum",
+      "relationshipName": "photo"
+    }
+  ],
+  "changelogDate": "20210210220156",
+  "entityTableName": "calbum",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,90 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.post.home.title">Posts</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-post" [routerLink]="['/post/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.post.home.createLabel">
+            Create a new Post
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="posts?.length === 0">
+        <span jhiTranslate="springgoodApp.post.home.notFound">No posts found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="posts && posts.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.post.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="publicationDate"><span jhiTranslate="springgoodApp.post.publicationDate">Publication Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="headline"><span jhiTranslate="springgoodApp.post.headline">Headline</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="leadtext"><span jhiTranslate="springgoodApp.post.leadtext">Leadtext</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="bodytext"><span jhiTranslate="springgoodApp.post.bodytext">Bodytext</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="quote"><span jhiTranslate="springgoodApp.post.quote">Quote</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="conclusion"><span jhiTranslate="springgoodApp.post.conclusion">Conclusion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="linkText"><span jhiTranslate="springgoodApp.post.linkText">Link Text</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="linkURL"><span jhiTranslate="springgoodApp.post.linkURL">Link URL</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="image"><span jhiTranslate="springgoodApp.post.image">Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="blog.title"><span jhiTranslate="springgoodApp.post.blog">Blog</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let post of posts ;trackBy: trackId">
+                    <td><a [routerLink]="['/post', post.id, 'view']">{{ post.id }}</a></td>
+                    <td>{{ post.creationDate | date:'medium' }}</td>
+                    <td>{{ post.publicationDate | date:'medium' }}</td>
+                    <td>{{ post.headline }}</td>
+                    <td>{{ post.leadtext }}</td>
+                    <td>{{ post.bodytext }}</td>
+                    <td>{{ post.quote }}</td>
+                    <td>{{ post.conclusion }}</td>
+                    <td>{{ post.linkText }}</td>
+                    <td>{{ post.linkURL }}</td>
+                    <td>
+                        <a *ngIf="post.image" (click)="openFile(post.imageContentType, post.image)">
+                            <img [src]="'data:' + post.imageContentType + ';base64,' + post.image" style="max-height: 30px;" alt="post image"/>
+                        </a>
+                        <span *ngIf="post.image">{{ post.imageContentType }}, {{ byteSize(post.image) }}</span>
+                    </td>
+                    <td>
+                        <div *ngIf="post.blog">
+                            <a [routerLink]="['/blog', post.blog?.id, 'view']" >{{ post.blog?.title }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/post', post.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/post', post.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(post)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

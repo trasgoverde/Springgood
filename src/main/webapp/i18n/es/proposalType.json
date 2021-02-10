@@ -1,0 +1,11 @@
+{
+  "springgoodApp": {
+    "ProposalType": {
+      "null": "",
+      "STUDY": "STUDY",
+      "APPROVED": "APPROVED",
+      "DEVELOPMENT": "DEVELOPMENT",
+      "PRODUCTION": "PRODUCTION"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "springgoodApp": {
+    "cmessage": {
+      "home": {
+        "title": "Cmessages",
+        "createLabel": "Create a new Cmessage",
+        "createOrEditLabel": "Create or edit a Cmessage",
+        "notFound": "No Cmessages found"
+      },
+      "created": "A new Cmessage is created with identifier {{ param }}",
+      "updated": "A Cmessage is updated with identifier {{ param }}",
+      "deleted": "A Cmessage is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cmessage {{ id }}?"
+      },
+      "detail": {
+        "title": "Cmessage"
+      },
+      "creationDate": "Creation Date",
+      "cmessageText": "Cmessage Text",
+      "isDelivered": "Is Delivered",
+      "sender": "Sender",
+      "receiver": "Receiver",
+      "csender": "Csender",
+      "creceiver": "Creceiver"
+    }
+  }
+}

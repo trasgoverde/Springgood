@@ -1,0 +1,193 @@
+{
+  "name": "Appuser",
+  "fields": [
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "assignedVotesPoints",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "appprofile",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "appprofile",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "appphoto",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "appphoto",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "community",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "community",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blog",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "blog",
+      "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "notification",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "album",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "album",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "comment",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "post",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "cmessage",
+      "otherEntityRelationshipName": "sender",
+      "relationshipName": "sender",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "cmessage",
+      "otherEntityRelationshipName": "receiver",
+      "relationshipName": "receiver",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "follow",
+      "otherEntityRelationshipName": "followed",
+      "relationshipName": "followed",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "follow",
+      "otherEntityRelationshipName": "following",
+      "relationshipName": "following",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blockuser",
+      "otherEntityRelationshipName": "blockeduser",
+      "relationshipName": "blockeduser",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blockuser",
+      "otherEntityRelationshipName": "blockinguser",
+      "relationshipName": "blockinguser",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vtopic",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "vtopic",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vquestion",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "vquestion",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vanswer",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "vanswer",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vthumb",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "vthumb",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "proposal",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "proposal",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "proposalVote",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "proposalVote",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "interest",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "interest",
+      "otherEntityField": "interestName",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "activity",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "activity",
+      "otherEntityField": "activityName",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "celeb",
+      "otherEntityRelationshipName": "appuser",
+      "relationshipName": "celeb",
+      "otherEntityField": "celebName",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20210210221556",
+  "entityTableName": "appuser",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

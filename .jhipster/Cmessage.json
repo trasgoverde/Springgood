@@ -1,0 +1,66 @@
+{
+  "name": "Cmessage",
+  "fields": [
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "cmessageText",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength",
+        "required"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "8000"
+    },
+    {
+      "fieldName": "isDelivered",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "appuser",
+      "otherEntityRelationshipName": "sender",
+      "relationshipName": "sender"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "appuser",
+      "otherEntityRelationshipName": "receiver",
+      "relationshipName": "receiver"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "community",
+      "otherEntityRelationshipName": "csender",
+      "relationshipName": "csender",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "community",
+      "otherEntityRelationshipName": "creceiver",
+      "relationshipName": "creceiver",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210210215256",
+  "entityTableName": "cmessage",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

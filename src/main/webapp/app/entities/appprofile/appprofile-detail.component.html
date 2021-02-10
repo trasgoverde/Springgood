@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="appprofile">
+            <h2><span jhiTranslate="springgoodApp.appprofile.detail.title">Appprofile</span> {{ appprofile.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="springgoodApp.appprofile.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{ appprofile.creationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.gender">Gender</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'springgoodApp.Gender.' + appprofile.gender }}">{{ appprofile.gender }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.phone">Phone</span></dt>
+                <dd>
+                    <span>{{ appprofile.phone }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.bio">Bio</span></dt>
+                <dd>
+                    <span>{{ appprofile.bio }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.facebook">Facebook</span></dt>
+                <dd>
+                    <span>{{ appprofile.facebook }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.twitter">Twitter</span></dt>
+                <dd>
+                    <span>{{ appprofile.twitter }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.linkedin">Linkedin</span></dt>
+                <dd>
+                    <span>{{ appprofile.linkedin }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.instagram">Instagram</span></dt>
+                <dd>
+                    <span>{{ appprofile.instagram }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.googlePlus">Google Plus</span></dt>
+                <dd>
+                    <span>{{ appprofile.googlePlus }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.birthdate">Birthdate</span></dt>
+                <dd>
+                    <span>{{ appprofile.birthdate }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.sibblings">Sibblings</span></dt>
+                <dd>
+                    <span>{{ appprofile.sibblings }}</span>
+                </dd>
+                <dt><span jhiTranslate="springgoodApp.appprofile.appuser">Appuser</span></dt>
+                <dd>
+                    <div *ngIf="appprofile.appuser">
+                        <a [routerLink]="['/appuser', appprofile.appuser?.id, 'view']">{{ appprofile.appuser?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/appprofile', appprofile.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

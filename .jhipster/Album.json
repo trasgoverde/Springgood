@@ -1,0 +1,49 @@
+{
+  "name": "Album",
+  "fields": [
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength",
+        "required"
+      ],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "appuser",
+      "otherEntityRelationshipName": "album",
+      "relationshipValidateRules": "required",
+      "relationshipName": "appuser"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "photo",
+      "otherEntityRelationshipName": "album",
+      "relationshipName": "photo"
+    }
+  ],
+  "changelogDate": "20210210220056",
+  "entityTableName": "album",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

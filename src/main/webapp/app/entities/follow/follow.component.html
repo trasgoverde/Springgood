@@ -1,0 +1,73 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="springgoodApp.follow.home.title">Follows</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-follow" [routerLink]="['/follow/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="springgoodApp.follow.home.createLabel">
+            Create a new Follow
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="follows?.length === 0">
+        <span jhiTranslate="springgoodApp.follow.home.notFound">No follows found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="follows && follows.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="creationDate"><span jhiTranslate="springgoodApp.follow.creationDate">Creation Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cfollowed.id"><span jhiTranslate="springgoodApp.follow.cfollowed">Cfollowed</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cfollowing.id"><span jhiTranslate="springgoodApp.follow.cfollowing">Cfollowing</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let follow of follows ;trackBy: trackId">
+                    <td><a [routerLink]="['/follow', follow.id, 'view']">{{ follow.id }}</a></td>
+                    <td>{{ follow.creationDate | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="follow.cfollowed">
+                            <a [routerLink]="['/community', follow.cfollowed?.id, 'view']" >{{ follow.cfollowed?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="follow.cfollowing">
+                            <a [routerLink]="['/community', follow.cfollowing?.id, 'view']" >{{ follow.cfollowing?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/follow', follow.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/follow', follow.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(follow)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
