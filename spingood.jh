@@ -1,0 +1,278 @@
+
+// Monolithic Spingular V6.3.1
+// NOTE: Check required fields in entities
+
+// ENTITIES:
+entity Blog {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+    image ImageBlob
+}
+  
+entity Post {
+    creationDate Instant required
+    publicationDate Instant
+    headline String minlength(2) maxlength(100) required
+    leadtext String minlength(2) maxlength(1000)
+    bodytext String minlength(2) maxlength(65000) required
+    quote String minlength(2) maxlength(1000)
+    conclusion String minlength(2) maxlength(2000)
+    linkText String minlength(2) maxlength(1000)
+    linkURL String minlength(2) maxlength(1000)
+    image ImageBlob
+}
+
+entity Topic {
+    topicName String minlength(2) maxlength(40) required
+}
+
+entity Tag {
+    tagName String minlength(2) maxlength(40) required
+}
+
+entity Comment {
+    creationDate Instant required
+    commentText String minlength(2) maxlength(65000) required
+    isOffensive Boolean
+}
+
+entity Cmessage {
+    creationDate Instant required
+    CmessageText String minlength(2) maxlength(8000) required
+    isDelivered Boolean
+}
+
+entity Bmessage {
+    creationDate Instant required
+    BmessageText String minlength(2) maxlength(8000) required
+    isDelivered Boolean
+}
+
+entity Notification {
+    creationDate Instant required
+    notificationDate Instant
+    notificationReason NotificationReason required
+    notificationText String minlength(2) maxlength(100)
+    isDelivered Boolean
+}
+
+entity Appphoto {
+    creationDate Instant required
+    image ImageBlob
+}
+
+// MODIFY Appprofile to hold some universal value defining the Social Media
+entity Appprofile {
+    creationDate Instant required
+    gender Gender
+    phone String maxlength(20)
+    bio String maxlength(7500)
+    facebook String maxlength(50)
+    twitter String maxlength(50)
+    linkedin String maxlength(50)
+    instagram String maxlength(50)
+    googlePlus String maxlength(50)
+    birthdate Instant
+    sibblings Integer min(-1) max(20)
+}
+
+entity Community {
+    creationDate Instant required
+    communityName String minlength(2) maxlength(100) required
+    communityDescription String minlength(2) maxlength(7500) required
+    image ImageBlob
+    isActive Boolean
+}
+
+entity Follow {
+    creationDate Instant
+}
+
+entity Blockuser {
+    creationDate Instant
+}
+
+entity Album {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+}
+
+entity Calbum {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+}
+
+entity Photo {
+    creationDate Instant required
+    image ImageBlob
+}
+
+entity Interest {
+    interestName String minlength(2) maxlength(40) required
+}
+
+entity Activity {
+    activityName String minlength(2) maxlength(40) required
+}
+
+entity Celeb {
+    celebName String minlength(2) maxlength(40) required
+}
+
+entity Cinterest {
+    interestName String minlength(2) maxlength(40) required
+}
+
+entity Cactivity {
+    activityName String minlength(2) maxlength(40) required
+}
+
+entity Cceleb {
+    celebName String minlength(2) maxlength(40) required
+}
+
+
+
+entity Vtopic {
+    creationDate Instant required
+    vtopicTitle String minlength(2) maxlength(50) required
+    vtopicDescription String minlength(2) maxlength(250)
+}
+
+entity Vquestion {
+    creationDate Instant required
+    vquestion String minlength(2) maxlength(100) required
+    vquestionDescription String minlength(2) maxlength(250)
+}
+
+entity Vanswer {
+    creationDate Instant required
+    urlVanswer String minlength(2) maxlength(500) required
+    accepted Boolean
+}
+
+entity Vthumb {
+    creationDate Instant required
+    vthumbUp Boolean
+    vthumbDown Boolean
+}
+
+
+entity Proposal {
+    creationDate Instant required
+    proposalName String minlength(2) maxlength(250) required
+    proposalType ProposalType required
+    proposalRole ProposalRole required
+    releaseDate Instant
+    isOpen Boolean
+    isAccepted Boolean
+    isPaid Boolean
+}
+
+entity ProposalVote {
+    creationDate Instant required
+    votePoints Long required
+}
+
+entity Appuser {
+   creationDate Instant required
+   assignedVotesPoints Long
+}
+
+// ENUMS:
+enum Gender {
+    MALE, FEMALE, OTHER
+}
+
+enum CivilStatus {
+    NA, SINGLE, MARRIED, DIVORCED, WIDOWER, SEPARATED, ENGAGED, OTHER
+}
+
+enum Purpose {
+    NOT_INTERESTED, FRIENDSHIP, MEET_PEOPLE, STABLE_RELATIONSHIP, MARRIAGE, OTHER
+}
+
+enum NotificationReason {
+    FOLLOWING, UNFOLLOWING, PROPOSAL_RELEASED, FOLLOWER_STATUS, AUTHORIZE_COMMUNITY_FOLLOWER, UNAUTHORIZE_COMMUNITY_FOLLOWER
+}
+
+enum ProposalType {
+    STUDY, APPROVED, DEVELOPMENT, PRODUCTION
+}
+
+enum ProposalRole {
+    APPUSER, ORGANIZER, MANAGER, ADMIN   
+}
+
+// RELATIONSHIPS:
+relationship OneToOne {
+    
+    Appprofile{appuser(id) required} to Appuser{appprofile(id)}
+    Appphoto{appuser(id) required} to Appuser{appphoto(id)}
+}
+
+relationship OneToMany {
+    Community{appuser(id) required} to Appuser{community}
+    Blog{appuser(id) required} to Appuser{blog(title)}
+    Notification{appuser(id) required} to Appuser{notification}
+    Album{appuser(id) required} to Appuser{album(id)}
+    Calbum{community(communityName) required} to Community{calbum(id) required}
+    Comment{appuser(id) required} to Appuser{comment}
+    Post{appuser(id) required} to Appuser{post}
+    Cmessage{sender(id)} to Appuser{sender(id)}
+    Cmessage{receiver(id)} to Appuser{receiver(id)}
+    Follow{followed(id)} to Appuser{followed(id)}
+    Follow{following(id)} to Appuser{following(id)}
+    Blockuser{blockeduser(id)} to Appuser{blockeduser(id)}
+    Blockuser{blockinguser(id)} to Appuser{blockinguser(id)}
+    Vtopic{appuser(id) required} to Appuser{vtopic(id)}
+    Vquestion{appuser(id) required} to Appuser{vquestion(id)}
+    Vanswer{appuser(id) required} to Appuser{vanswer(id)}
+    Vthumb{appuser(id) required} to Appuser{vthumb(id)}
+    Proposal{appuser(id)} to Appuser{proposal(id)}
+    ProposalVote{appuser(id)} to Appuser{proposalVote(id)}
+}
+
+relationship OneToMany {
+    Community{blog(id)} to Blog{community(communityName)}
+    Blog{post(id)} to Post{blog(title) required}
+    Post{comment(id)} to Comment{post(id) required}
+    Community{csender(id)} to Cmessage{csender(id)}
+    Community{creceiver(id)} to Cmessage{creceiver(id)}
+    Community{cfollowed(id)} to Follow{cfollowed(id)}
+    Community{cfollowing(id)} to Follow{cfollowing(id)}
+    Community{cblockeduser(id)} to Blockuser{cblockeduser(id)}
+    Community{cblockinguser(id)} to Blockuser{cblockinguser(id)}
+    Album{photo(id)} to Photo{album(title)}
+    Calbum{photo(id)} to Photo{calbum(title)}
+    Vtopic{vquestion} to Vquestion{vtopic(id) required}
+    Vquestion{vanswer(id)} to Vanswer{vquestion(id) required}
+    Vquestion{vthumb(id)} to Vthumb{vquestion(id)}
+    Vanswer{vthumb(id)} to Vthumb{vanswer(id)}
+    Proposal{proposalVote(id)} to ProposalVote{proposal(id)}
+    Post{proposal(id)} to Proposal{post(id)}
+}
+
+relationship ManyToMany {
+    Tag{post(headline)} to Post{tag(tagName)}
+    Topic{post(headline)} to Post{topic(topicName)}
+    Cinterest{community(id)} to Community{cinterest(interestName)}
+    Cactivity{community(id)} to Community{cactivity(activityName)}
+    Cceleb{community(id)} to Community{cceleb(celebName)}
+    Interest{appuser(id)} to Appuser{interest(interestName)}
+    Activity{appuser(id)} to Appuser{activity(activityName)}
+    Celeb{appuser(id)} to Appuser{celeb(celebName)}
+}
+
+// SET PAGINATION OPTIONS:
+paginate all with pagination
+ paginate ChatCMessage with infinite-scroll
+ paginate all with infinite-scroll
+
+
+
+// DTO:
+//dto all with mapstruct
+
+// FILTERING:
+//filter *
